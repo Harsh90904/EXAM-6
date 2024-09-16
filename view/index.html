@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* General styling for the body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+form {
+    width: 100%;
+    max-width: 500px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+form input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+form input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+    background-color: #218838;
+}
+
+#list {
+    width: 100%;
+    max-width: 600px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#list h1, #list h2 {
+    margin: 0;
+    padding: 5px 0;
+}
+
+#list h2 {
+    color: #555;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+#list div {
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+#list button {
+    padding: 5px 10px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#list button:hover {
+    opacity: 0.8;
+    
+}
+
+#list button:nth-child(1) {
+    background-color: #dc3545;
+    color: white;
+}
+
+#list button:nth-child(2) {
+    background-color: #007bff;
+    color: white;
+}
+
+    </style>
+</head>
+<body>
+<hr>
+<div id="list"></div>
+<script>
+
+
+let userId = localStorage.getItem("id");
+
+
+const getUserRole = async () => {
+    
+        let req = await fetch(`http://localhost:8520/tasks/${userId}`);
+        let userData = await req.json();
+        console.log(userData);
+        
+        
+        if(userData.type == "student"){
+            document.getElementById("list").innerHTML = "";
+            let h1 = document.createElement("h1");
+            h1.innerHTML = ele.username;
+            let h2 = document.createElement("h2");
+            h2.innerHTML = ele.email;
+            let h3 = document.createElement("h3");
+            h3.innerHTML = ele.age
+            let div = document.createElement("div");
+
+        div.append(h1, h2 ,h3);
+
+        document.getElementById("list").append(div);
+        }
+        else{
+            mapper(userData);
+        }
+};
+
+
+
+const mapper = (data) => {
+    document.getElementById("list").innerHTML = "";
+
+    data.map((ele) => {
+        let h1 = document.createElement("h1");
+        h1.innerHTML ="name : " + ele.name;
+        let h2 = document.createElement("h2");
+        h2.innerHTML ="email : " + ele.email;
+        let div = document.createElement("div");
+        let h3 = document.createElement("h3");
+        h3.innerHTML = "age : " + ele.age
+        div.append(h1, h2 ,h3);
+
+        document.getElementById("list").append(div);
+    });
+};
+
+getUserRole();
+
+</script>
+</body>
+</html>

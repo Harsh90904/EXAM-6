@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signup</title>
+    <link rel="stylesheet" href="./singup.css">
+    <style>
+      body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  #userData {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  input[type="submit"] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  input[type="submit"]:hover {
+    background-color: #45a049;
+  }
+    </style>
+  </head>
+  <body>
+    <form id="userData">
+      <input type="text" name="username" id="username" placeholder="Enter a Name" />
+      <input type="email" name="email" id="email" placeholder="Enter an Email" />
+      <input type="text" name="password" id="password" placeholder="Enter a Password" />
+      <input type="number" name="age" id="age" placeholder="Enter a age">
+      <select id="sel">
+        <option value="teacher">Teacher</option>
+        <option value="student">Studant</option>
+      </select>
+      <a href="./login.html">login page</a>
+       <input type="submit" />
+    </form>
+  </body>
+
+  <script>
+    const postData = async (user) => {
+      console.log(user);
+      
+    let req = await fetch("http://localhost:8520/signup", {
+        method: 'POST',
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(user)
+    })
+    let res = await req.json()
+    console.log(res);
+    
+
+}
+
+const handleData = (e) => {
+    e.preventDefault();
+    let data = {
+        username: document.getElementById('username').value,
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value,
+        type: document.getElementById('sel').value.toLowerCase(),
+        age: document.getElementById('age').value,
+    }
+console.log(
+  data
+);
+
+    postData(data)
+}
+
+document.getElementById("userData").addEventListener("submit", handleData);
+
+  </script>
+</html>
