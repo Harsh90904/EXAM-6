@@ -22,26 +22,6 @@ const getUserTasks = async (req, res) => {
         }
     
 };
-const filter = async (req, res) => {
-    const {age} = req.qurey;
-
-    if(age === 0-10){
-        let tasks = await User.find({age: {$lte: 10}});
-        res.send(tasks);
-    }
-    else if(age === 0-20){
-        let tasks = await User.find({age: {$lte: 20}});
-        res.send(tasks);
-    }
-    else if(age === 0-30){
-        let tasks = await User.find({age: {$lte: 30}});
-        res.send(tasks);
-    }
-    else if(age === 0-40){
-        let tasks = await User.find({age: {$lte: 40}});
-        res.send(tasks);
-    }
-};
 
 
-module.exports = { getUserTasks , filter };
+module.exports = { getUserTasks };
