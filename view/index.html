@@ -93,7 +93,7 @@
             userData = await req.json();
             console.log(userData);
 
-            if (userData.type === "student") {
+            if (userData.type == "student") {
                 // student
             } else {
                 mapper(userData);
